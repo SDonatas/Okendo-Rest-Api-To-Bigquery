@@ -1,0 +1,77 @@
+dataset: okendo
+destinationTablePatern: '{}_reviews_v2'
+exclude_accounts:
+- account_2
+last_state_field: dateCreated
+last_state_field_fallback: '2020-01-01'
+last_state_field_fallback_format: '%Y-%m-%d'
+postFunctions:
+- copy:
+    sourceField: order
+    targetField: orderField
+- translate:
+    sourceField: body
+    targetField: body_en
+- extract_keywords:
+    sourceField: body_en
+    targetField: body_en_keywords
+project_id: YourProjectId
+service_account_path: /auth/service_account.json
+schema:
+  account_1:
+  - name: orderField
+    type: STRING
+  account_2:
+  - name: subscriberId
+    type: STRING
+  - name: reviewId
+    type: STRING
+  - name: productId
+    type: STRING
+  - name: customerId
+    type: STRING
+  - name: body
+    type: STRING
+  - name: containsProfanity
+    type: STRING
+  - name: dateCreated
+    type: TIMESTAMP
+  - name: helpfulCount
+    type: STRING
+  - name: isRecommended
+    type: STRING
+  - name: order
+    type: STRING
+  - name: rating
+    type: STRING
+  - name: reviewer
+    type: STRING
+  - name: sentiment
+    type: STRING
+  - name: status
+    type: STRING
+  - name: title
+    type: STRING
+  - name: unhelpfulCount
+    type: STRING
+  - name: variantId
+    type: STRING
+  - name: variantName
+    type: STRING
+  - name: productName
+    type: STRING
+  - name: media
+    type: STRING
+  - name: orderField
+    type: STRING
+  - name: body_en
+    type: STRING
+  - name: body_en_keywords
+    type: RECORD
+    mode: REPEATED
+    fields:
+      - name: keyword
+        type: STRING
+      - name: score
+        type: FLOAT
+tableNameStructure: '{}_reviews_v2'
